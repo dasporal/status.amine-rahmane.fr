@@ -22,7 +22,7 @@ type StatusCheck struct {
 	WebsiteID    int32
 	Timestamp    pgtype.Timestamptz
 	StatusCode   pgtype.Int4
-	ResponseTime int64
+	ResponseTime pgtype.Int4
 	Status       pgtype.Text
 	Details      pgtype.Text
 }

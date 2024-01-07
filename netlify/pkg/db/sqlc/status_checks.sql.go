@@ -15,14 +15,9 @@ const getRecentStatusChecks = `-- name: GetRecentStatusChecks :many
 SELECT check_id, timestamp, status_code, response_time, status, details
 FROM status_checks
 WHERE website_id = $1
+AND timestamp >= NOW() - '1 day'::INTERVAL
 ORDER BY timestamp DESC
-LIMIT $2
 `
-
-type GetRecentStatusChecksParams struct {
-	WebsiteID int32
-	Limit     int32
-}
 
 type GetRecentStatusChecksRow struct {
 	CheckID      int32
@@ -33,8 +28,8 @@ type GetRecentStatusChecksRow struct {
 	Details      pgtype.Text
 }
 
-func (q *Queries) GetRecentStatusChecks(ctx context.Context, arg GetRecentStatusChecksParams) ([]GetRecentStatusChecksRow, error) {
-	rows, err := q.db.Query(ctx, getRecentStatusChecks, arg.WebsiteID, arg.Limit)
+func (q *Queries) GetRecentStatusChecks(ctx context.Context, websiteID int32) ([]GetRecentStatusChecksRow, error) {
+	rows, err := q.db.Query(ctx, getRecentStatusChecks, websiteID)
 	if err != nil {
 		return nil, err
 	}
@@ -68,7 +63,7 @@ VALUES ($1, $2, $3, $4, $5)
 type InsertStatusCheckParams struct {
 	WebsiteID    int32
 	StatusCode   pgtype.Int4
-	ResponseTime int64
+	ResponseTime pgtype.Int4
 	Status       pgtype.Text
 	Details      pgtype.Text
 }
