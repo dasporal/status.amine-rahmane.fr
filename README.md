@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# Status Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+I was curious about how one would go about setting up their own status page for their projects, and thought it would be a nice week-end challenge, along with helping me improve my Go coding skills, as I've never had the opportunity or took the time to participate in various Go open-source projects.
 
-Currently, two official plugins are available:
+There's probably a lot of beginner mistakes in there, but it's all part of the fun. :)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+I've still got a bunch of other features I want to implement, things to do to improve performances (too much client-side logic atm, delaying the loading times when accessing) and use the project as some sort of sandbox for whichever ideas I want to toy with (mainly thinking about Authkit).
 
-## Expanding the ESLint configuration
+Vite app is stored in `./src` and the Go modules for the functions in `./netlify`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Frontend
+- React (w/ Vite)
+- ShadCN & Tailwind
 
-- Configure the top-level `parserOptions` property like this:
+## Backend
+- Netlify (w/ Functions)
+- Go
+- Supabase
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## Planned
+- More detailed views for each websites and events
+- Implement alerts 
+- Offload some client-side logic to the Netlify Functions
