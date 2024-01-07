@@ -6,8 +6,15 @@ import {
   CardDescription,
   CardContent,
 } from './ui/card'
+import IWebsite from '@/interfaces/IWebsite'
+import IStatusCheck from '@/interfaces/IStatusCheck'
 
-export function SiteCard({ data }) {
+interface IData {
+  Website: IWebsite,
+  StatusChecks: IStatusCheck[]
+}
+
+export function SiteCard({ data }: { data: IData }) {
   const [status, setStatus] = useState({
     text: 'Offline',
     color: 'text-red-500',

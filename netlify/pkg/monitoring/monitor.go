@@ -39,9 +39,9 @@ func handleStatus(status *http.Response, website sqlc.Website, duration int64) {
 	defer database.Conn.Close(ctx)
 
 	statusCheck := sqlc.StatusCheck{
-		StatusCode: pgtype.Int4{Int32: int32(status.StatusCode), Valid: true},
-		ResponseTime: duration,
-		Status: pgtype.Text{String: status.Status, Valid: true},
+		StatusCode:   pgtype.Int4{Int32: int32(status.StatusCode), Valid: true},
+		ResponseTime: pgtype.Int4{Int32: int32(duration), Valid: true},
+		Status:       pgtype.Text{String: status.Status, Valid: true},
 	}
 
 	err = database.InsertStatusCheck(ctx, website, statusCheck)
@@ -52,19 +52,18 @@ func handleStatus(status *http.Response, website sqlc.Website, duration int64) {
 
 func ping(website sqlc.Website) (resp *http.Response, duration time.Duration) {
 	log.Println("Pinging:", website.Url)
-	
+
 	var start time.Time
 
-  start = time.Now()
+	start = time.Now()
 	resp, err := http.Get(website.Url)
-	
+
 	if err != nil {
-      log.Fatal(err)
-  }
+		log.Fatal(err)
+	}
 
 	duration = time.Since(start)
 	log.Printf("Total time for response: %vms\n", duration.Milliseconds())
 
 	return resp, duration
 }
-

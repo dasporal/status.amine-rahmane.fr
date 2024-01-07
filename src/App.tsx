@@ -1,6 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { SiteCard } from './components/SiteCard'
+import IWebsite from './interfaces/IWebsite'
+import IStatusCheck from './interfaces/IStatusCheck'
+
+interface IData {
+  Website: IWebsite,
+  StatusChecks: IStatusCheck[]
+}
 
 function App() {
   // Write an api call
@@ -17,8 +24,8 @@ function App() {
         <h1 className="text-3xl font-bold text-white">Status Page</h1>
         <div className="grid auto-rows-fr grid-cols-1 md:grid-cols-3  gap-4 p-4">
           {
-            data.map((site: any) => (
-              <SiteCard key={site.Website.websiteID} data={site} />
+            data.map((site: IData) => (
+              <SiteCard key={site.Website.WebsiteID} data={site} />
             ))
           }
         </div>
