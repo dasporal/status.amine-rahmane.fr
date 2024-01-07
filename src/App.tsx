@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import { Skeleton } from '@/components/ui/skeleton'
 import { SiteCard } from './components/SiteCard'
 import IWebsite from './interfaces/IWebsite'
 import IStatusCheck from './interfaces/IStatusCheck'
