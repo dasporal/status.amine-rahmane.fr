@@ -10,7 +10,7 @@ import IWebsite from '@/interfaces/IWebsite'
 import IStatusCheck from '@/interfaces/IStatusCheck'
 
 interface IData {
-  Website: IWebsite,
+  Website: IWebsite
   StatusChecks: IStatusCheck[]
 }
 
@@ -22,10 +22,12 @@ export function SiteCard({ data }: { data: IData }) {
   const [averageResponseTime, setAverageResponseTime] = useState(0)
 
   useEffect(() => {
-    const totalResponseTime = data.StatusChecks.reduce((acc, check) => acc + check.ResponseTime, 0);
-    const avgResponseTime = totalResponseTime / data.StatusChecks.length;
-    setAverageResponseTime(Math.trunc(avgResponseTime));
-
+    const totalResponseTime = data.StatusChecks.reduce(
+      (acc, check) => acc + check.ResponseTime,
+      0
+    )
+    const avgResponseTime = totalResponseTime / data.StatusChecks.length
+    setAverageResponseTime(Math.trunc(avgResponseTime))
 
     if (
       data.StatusChecks[0].StatusCode >= 200 &&
@@ -43,13 +45,16 @@ export function SiteCard({ data }: { data: IData }) {
   }, [data])
 
   return (
-    <Card className="hover:bg-background-900">
+    <Card className="flex flex-col justify-around hover:bg-background-900">
       <a href={data.Website.Url}>
         <CardHeader>
           <CardTitle>{data.Website.Name}</CardTitle>
-          <CardDescription className={`flex gap-4 font-semibold ${status.color}`}>
+          <CardDescription
+            className={`flex gap-4 font-semibold ${status.color}`}>
             {status.text}
-            {averageResponseTime > 1000 && (<span className='text-orange-500'>Performance degraded</span>)}
+            {averageResponseTime > 1000 && (
+              <span className="text-orange-500">Performance degraded</span>
+            )}
           </CardDescription>
         </CardHeader>
         <CardContent>
