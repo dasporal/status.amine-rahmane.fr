@@ -9,6 +9,13 @@ module.exports = {
   ],
   prefix: "",
   theme: {
+    colors: {
+      'text': 'rgb(254, 252, 251)',
+      'background': 'rgb(8, 3, 2)',
+      'primary': 'rgb(176, 222, 232)',
+      'secondary': 'rgb(9, 16, 32)',
+      'accent': 'rgb(228, 100, 71)',
+     },
     container: {
       center: true,
       padding: "2rem",
