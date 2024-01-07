@@ -1,4 +1,4 @@
-// This function is called to retrieve the logs of the day?
+// This function is called to retrieve the logs of the day
 
 package main
 
@@ -10,7 +10,7 @@ import (
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	return &events.APIGatewayProxyResponse{
     StatusCode:        200,
-    Body:              "Function called and websites pinged",
+    Body:              "Function called and I will return the logs of the day",
   }, nil
 }
 
