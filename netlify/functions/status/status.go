@@ -14,7 +14,7 @@ import (
 )
 
 type Data struct {
-	WebsiteID    int32
+	Website      sqlc.Website
 	StatusChecks []sqlc.GetRecentStatusChecksRow
 }
 
@@ -36,7 +36,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 			continue
 		}
 
-		data := Data{WebsiteID: website.WebsiteID, StatusChecks: recentStatusChecks}
+		data := Data{Website: website, StatusChecks: recentStatusChecks}
 
 		status = append(status, data)
 	}
