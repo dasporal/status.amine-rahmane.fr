@@ -33,7 +33,7 @@ function App() {
       <div className="container py-4">
         <h1 className="text-3xl font-bold text-white">Status Page</h1>
         <div className="grid auto-rows-fr grid-cols-1 gap-4  p-4 md:grid-cols-3">
-          {isLoading && <SkeletonCard />}
+          {isLoading && <SkeletonCards />}
           {data.map((site: IData) => (
             <SiteCard
               key={site.Website.website_id}
@@ -43,6 +43,19 @@ function App() {
         </div>
       </div>
     </main>
+  )
+}
+
+function SkeletonCards() {
+  return (
+    <>
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+      <SkeletonCard />
+    </>
   )
 }
 
