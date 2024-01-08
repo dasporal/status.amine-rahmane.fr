@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import { SiteCard } from './components/SiteCard'
-import IWebsite from './interfaces/IWebsite'
 import IStatusCheck from './interfaces/IStatusCheck'
 import { SkeletonCard } from './components/SkeletonCard'
 
 interface IData {
-  Website: IWebsite
-  StatusChecks: IStatusCheck[]
+  Website: {
+    website_id: number
+    website_name: string
+    website_url: string
+  }
+  StatusCheck: IStatusCheck,
+  average_response_time: number
 }
+
 
 function App() {
   const [isLoading, setIsLoading] = useState(true)
@@ -31,7 +36,7 @@ function App() {
           {isLoading && <SkeletonCard />}
           {data.map((site: IData) => (
             <SiteCard
-              key={site.Website.WebsiteID}
+              key={site.Website.website_id}
               data={site}
             />
           ))}

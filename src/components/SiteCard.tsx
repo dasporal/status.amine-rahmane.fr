@@ -6,12 +6,16 @@ import {
   CardDescription,
   CardContent,
 } from './ui/card'
-import IWebsite from '@/interfaces/IWebsite'
 import IStatusCheck from '@/interfaces/IStatusCheck'
 
 interface IData {
-  Website: IWebsite
-  StatusChecks: IStatusCheck[]
+  Website: {
+    website_id: number
+    website_name: string
+    website_url: string
+  }
+  StatusCheck: IStatusCheck,
+  average_response_time: number
 }
 
 export function SiteCard({ data }: { data: IData }) {
@@ -19,24 +23,16 @@ export function SiteCard({ data }: { data: IData }) {
     text: 'Offline',
     color: 'text-red-500',
   })
-  const [averageResponseTime, setAverageResponseTime] = useState(0)
 
   useEffect(() => {
-    const totalResponseTime = data.StatusChecks.reduce(
-      (acc, check) => acc + check.ResponseTime,
-      0
-    )
-    const avgResponseTime = totalResponseTime / data.StatusChecks.length
-    setAverageResponseTime(Math.trunc(avgResponseTime))
-
     if (
-      data.StatusChecks[0].StatusCode >= 200 &&
-      data.StatusChecks[0].StatusCode <= 299
+      data.StatusCheck.StatusCode >= 200 &&
+      data.StatusCheck.StatusCode <= 299
     ) {
       setStatus({ text: 'Online', color: 'text-green-500' })
     } else if (
-      data.StatusChecks[0].StatusCode >= 400 &&
-      data.StatusChecks[0].StatusCode <= 499
+      data.StatusCheck.StatusCode >= 400 &&
+      data.StatusCheck.StatusCode <= 499
     ) {
       setStatus({ text: 'Website not foud', color: 'text-red-500' })
     } else {
@@ -46,20 +42,20 @@ export function SiteCard({ data }: { data: IData }) {
 
   return (
     <Card className="flex flex-col justify-around hover:bg-background-900">
-      <a href={data.Website.Url}>
+      <a href={data.Website.website_url}>
         <CardHeader>
-          <CardTitle>{data.Website.Name}</CardTitle>
+          <CardTitle>{data.Website.website_name}</CardTitle>
           <CardDescription
             className={`flex gap-4 font-semibold ${status.color}`}>
             {status.text}
-            {averageResponseTime > 1000 && (
+            {data.average_response_time > 1000 && (
               <span className="text-orange-500">Performance degraded</span>
             )}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p>Average response time today: {averageResponseTime}ms</p>
-          <p>Last Reponse: {data.StatusChecks[0].Status}</p>
+          <p>Average response time today: {data.average_response_time}ms</p>
+          <p>Last Reponse: {data.StatusCheck.Status}</p>
         </CardContent>
       </a>
     </Card>
