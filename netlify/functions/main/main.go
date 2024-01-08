@@ -7,13 +7,14 @@ import (
 )
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-  monitoring.PingWebsites()
+	monitoring.PingWebsites()
+
 	return &events.APIGatewayProxyResponse{
-    StatusCode:        200,
-    Body:              "Function called and websites pinged",
-  }, nil
+		StatusCode: 200,
+		Body:       "Function called and websites pinged",
+	}, nil
 }
 
 func main() {
-  lambda.Start(handler)
+	lambda.Start(handler)
 }
