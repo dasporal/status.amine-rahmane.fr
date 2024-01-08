@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/664dd3af-89af-4b2d-9623-226f8d202b5b/deploy-status)](https://status.amine-rahmane.fr)
+
 # Status Page
 
 I was curious about how one would go about setting up their own status page for their projects, and thought it would be a nice week-end challenge, along with helping me improve my Go coding skills, as I've never had the opportunity or took the time to participate in various Go open-source projects.
