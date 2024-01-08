@@ -10,22 +10,52 @@ interface IData {
     website_name: string
     website_url: string
   }
-  StatusCheck: IStatusCheck,
+  StatusCheck: IStatusCheck
   average_response_time: number
 }
 
-
 function App() {
   const [isLoading, setIsLoading] = useState(true)
+
+  const setCache = (key: string, value: IData, ttl: number) => {
+    const now = new Date()
+    const item = {
+      value: value,
+      expiry: now.getTime() + ttl,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  }
+
+  const getCache = (key: string) => {
+    const itemStr = localStorage.getItem(key)
+    if (!itemStr) {
+      return null
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return null
+    }
+    return item.value
+  }
+
   const [data, setData] = useState([])
+
   useEffect(() => {
-    setIsLoading(true)
-    fetch('/api/v1/status')
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data)
-        setIsLoading(false)
-      })
+    const cachedData = getCache('statusData')
+    if (cachedData) {
+      setData(cachedData)
+      setIsLoading(false)
+    } else {
+      fetch('/api/v1/status')
+        .then((response) => response.json())
+        .then((fetchedData) => {
+          setCache('statusData', fetchedData, 3600000)
+          setData(fetchedData)
+          setIsLoading(false)
+        })
+    }
   }, [])
 
   return (
@@ -46,15 +76,12 @@ function App() {
   )
 }
 
-function SkeletonCards() {
+function SkeletonCards({ number = 6 }: { number?: number }) {
   return (
     <>
-      <SkeletonCard />
-      <SkeletonCard />
-      <SkeletonCard />
-      <SkeletonCard />
-      <SkeletonCard />
-      <SkeletonCard />
+      {Array.from({ length: number }, (_, index) => (
+        <SkeletonCard key={index} />
+      ))}
     </>
   )
 }
