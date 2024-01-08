@@ -4,7 +4,7 @@ I was curious about how one would go about setting up their own status page for 
 
 There's probably a lot of beginner mistakes in there, but it's all part of the fun. :)
 
-I've still got a bunch of other features I want to implement, things to do to improve performances (too much client-side logic atm, delaying the loading times when accessing) and use the project as some sort of sandbox for whichever ideas I want to toy with (mainly thinking about Authkit).
+I've still got a bunch of other features I want to implement, things to do to improve performances and use the project as some sort of sandbox for whichever ideas I want to toy with (mainly thinking about Authkit).
 
 Vite app is stored in `./src` and the Go modules for the functions in `./netlify`
 
@@ -22,3 +22,4 @@ Vite app is stored in `./src` and the Go modules for the functions in `./netlify
 - More detailed views for each websites and events
 - Implement alerts 
 - ~~Offload some client-side logic to the Netlify Functions~~
+- Cache data
