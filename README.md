@@ -21,4 +21,4 @@ Vite app is stored in `./src` and the Go modules for the functions in `./netlify
 ## Planned
 - More detailed views for each websites and events
 - Implement alerts 
-- **Offload some client-side logic to the Netlify Functions**
+- ~~Offload some client-side logic to the Netlify Functions~~
