@@ -23,4 +23,5 @@ Vite app is stored in `./src` and the Go modules for the functions in `./netlify
 - More detailed views for each websites and events
 - Implement alerts 
 - ~~Offload some client-side logic to the Netlify Functions~~
-- Cache data
+- ~~Cache data~~
+- Generate Skeleton Cards based on number of websites instead of arbitrary number
