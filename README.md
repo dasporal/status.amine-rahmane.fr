@@ -16,6 +16,7 @@ Vite app is stored in `./src` and the Go modules for the functions in `./netlify
 - Netlify (w/ Functions)
 - Go
 - Supabase
+- Bruno collections available at `./netlify/collections`
 
 
 ## Planned
